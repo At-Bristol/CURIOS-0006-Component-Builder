@@ -1,55 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { ThemeProvider, injectGlobal } from 'styled-components'
 
-import App from './App';
+/*
+import { injectGlobal } from 'styled-components';
 import { light as theme } from './themes'
 
-/* eslint-disable no-unused-expressions */
+eslint-disable no-unused-expressions
 injectGlobal`
   body,html{
     margin:0;
-    font-family:${theme.font.family.regular};
 
     @font-face {
-      font-family: 'WeTheCurious-Light';
+      font-family: 'WeTheCurious';
       font-style: normal;
-      font-weight: 100;
+      font-weight: 400;
       src: local('WeTheCurious'), local('WeTheCurious-Light'), url(http://localhost:3000/fonts/latest/light) format('woff2');
     }
 
     @font-face {
-      font-family: 'WeTheCurious-Regular';
+      font-family: 'WeTheCurious';
       font-style: normal;
       font-weight: 400;
       src: local('WeTheCurious'), local('WeTheCurious-Regular'), url(http://localhost:3000/fonts/latest/regular) format('woff2');
     }
 
     @font-face {
-      font-family: 'WeTheCurious-Bold';
+      font-family: 'WeTheCurious';
       font-style: normal;
-      font-weight: 700;
+      font-weight: 400;
       src: local('WeTheCurious'), local('WeTheCurious-Bold'), url(http://localhost:3000/fonts/latest/bold) format('woff2');
     }
 
     @font-face {
-      font-family: 'WeTheCurious-Heavy';
+      font-family: 'WeTheCurious';
       font-style: normal;
-      font-weight: 900;
+      font-weight: 400;
       src: local('WeTheCurious'), local('WeTheCurious-Heavy'), url(http://localhost:3000/fonts/latest/heavy) format('woff2');
     }
-   
   }
   html{
-      background-color:${theme.backgroundColor};
+      background-color:'black';
   }
 `
 /* eslint-enable */
-
-const ProvidedApp = () => (
-  <ThemeProvider theme={theme}>
-    <App />
-  </ ThemeProvider>
-)
-
-ReactDOM.render(<ProvidedApp />, document.getElementById('root'));

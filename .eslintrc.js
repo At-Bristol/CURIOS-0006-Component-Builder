@@ -21,5 +21,6 @@ module.exports = {
     "rules": {
         "class-methods-use-this": 0,
         "semi":0,
+        "no-confusing-arrow":0.
     }
 };
