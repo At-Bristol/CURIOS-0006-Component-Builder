@@ -14,7 +14,6 @@ createMatch([])
 
 const Box = styled.div`
   height: 100%;
-  width: 100%;
   display: flex;
   align-items: ${(props) => {
     if (props.alignItems === 'start') return 'flex-start'
@@ -44,37 +43,16 @@ const Box = styled.div`
   }};
 `
 
-const Item = styled.div`
-`
-
 const StyledBox = (props) => {
   /* eslint-disable no-unused-vars */
   const {
     children,
-    wrap = true,
-    align,
-    alignItems,
-    alignContent,
-    justify,
-    size = 'medium',
   } = props
   /* eslint-enable */
 
   return (
-    <Box
-      {...props}
-      wrap={wrap}
-      justify={justify}
-      alignItems={alignItems}
-      alignContent={alignContent}
-      >
-      {Children.map(children, (e, i) => <Item
-        {...props}
-        wrap={wrap}
-        size={size}
-        key={i}>
-          {e}
-      </Item>)}
+    <Box {...props} >
+      {Children.map(children, e => e)}
     </ Box>
   )
 }
@@ -85,8 +63,12 @@ StyledBox.propTypes = {
   alignItems: PropTypes.oneOf(['start', 'end', 'center', 'baseline', 'stretch']),
   alignContent: PropTypes.oneOf(['start', 'end', 'center', 'between', 'around', 'stretch']),
   wrap: PropTypes.bool,
-  children: PropTypes.element,
+  children: PropTypes.node,
   align: PropTypes.oneOf(['center', 'start', 'end']),
+}
+
+StyledBox.defaultProps = {
+  size: 'medium',
 }
 
 export default StyledBox

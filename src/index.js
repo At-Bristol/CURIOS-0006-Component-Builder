@@ -49,7 +49,7 @@ injectGlobal`
 const ProvidedApp = () => (
   <ThemeProvider theme={theme}>
     <App />
-  </ ThemeProvider>
+  </ThemeProvider>
 )
 
 ReactDOM.render(<ProvidedApp />, document.getElementById('root'));

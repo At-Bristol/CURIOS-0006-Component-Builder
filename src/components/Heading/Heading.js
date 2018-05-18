@@ -98,7 +98,7 @@ StyledHeading.propTypes = {
   tag: PropTypes.string,
   truncate: PropTypes.bool,
   uppercase: PropTypes.bool,
-  children: PropTypes.element,
+  children: PropTypes.node,
 };
 
 StyledHeading.contextTypes = {

@@ -5,9 +5,9 @@ import Heading from './components/Heading'
 import Card from './components/Card'
 import Text from './components/Text'
 import Grid from './components/Grid'
-import Box from './components/Box'
 import Hero from './components/Hero'
 import AppBar from './components/AppBar'
+import Title from './components/Title'
 
 
 import horizon from './assets/img/horizon.jpg'
@@ -17,21 +17,15 @@ class App extends Component {
   render() {
     return (
         <div>
-          <AppBar>
-            <Button label={'Hi'} plain={true}></Button>
-            <Button label={'Hi'} plain={true}></Button>
-            <Button label={'Hi'} plain={true}></Button>
-            <Button label={'Hi'} plain={true}></Button>
+          <AppBar isTransparent={true} isGradient={true}>
+            <Title label={'Curious'} />
+            <Button label={'Hi'} plain={true} isSelected={true}></Button>
+            <Button label={'Button'} plain={true}></Button>
+            <Button label={'Button'} plain={true}></Button>
+            <Button label={'New Button'} plain={true}></Button>
           </AppBar>
-          <Hero label={'That is going on, on the thing with the'} image={horizon} imagePos={'center'}/>
-          <Box>
-            <Card mini={true} image={vertical} label={'Heading'} date={'May 17 2018'} imagePos={'center'}/>
-            <Card mini={true} image={vertical} label={'Heading'} date={'May 17 2018'} imagePos={'center'}/>
-            <Card mini={true} image={vertical} label={'Heading'} date={'May 17 2018'} imagePos={'center'}/>
-            <Card mini={true} image={vertical} label={'Heading'} date={'May 17 2018'} imagePos={'center'}/>
-            <Card mini={true} image={vertical} label={'Heading'} date={'May 17 2018'} imagePos={'center'}/>
-            <Card mini={true} image={vertical} label={'Heading'} date={'May 17 2018'} imagePos={'center'}/>
-          </Box>
+          <Hero image={horizon} imagePos={'center'}/>
+
           <Heading tag='h1'>Heading H1</Heading>
           <Heading tag='h2'>Heading H2</Heading>
           <Heading tag='h3'>Heading H3</Heading>

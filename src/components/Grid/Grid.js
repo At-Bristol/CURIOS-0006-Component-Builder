@@ -40,7 +40,7 @@ const StyledGrid = (props) => {
 
 StyledGrid.propTypes = {
   columns: PropTypes.number,
-  children: PropTypes.element,
+  children: PropTypes.node,
 }
 
 export default StyledGrid

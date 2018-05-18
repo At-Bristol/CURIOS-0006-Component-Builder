@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const PlainButton = styled.div`
+  font-size: 1.0em;
+  text-align: center;
   font-family: ${props => props.theme.font.family.bold};
+  font-weight: ${props => props.theme.font.weight.bold};
   color: ${props => props.shade === 'dark' ? 'black' : 'white'};
   cursor: ${props => props.disabled ? null : 'pointer'};
 `
+
 
 const BorderedButton = styled.button`
   background-color: ${(props) => {
@@ -38,16 +42,18 @@ const BorderedButton = styled.button`
   }
 `;
 
-const Button = props => props.plain
+
+const StyledButton = props => props.plain
   ? <PlainButton {...props}>{props.label}</PlainButton>
   : <BorderedButton {...props}>{props.label}</BorderedButton>
 
-Button.propTypes = {
+StyledButton.propTypes = {
   plain: PropTypes.bool,
   label: PropTypes.string,
 }
 
-const StyledButton = (props) => {
+
+const Button = (props) => {
   /* eslint-disable no-unused-vars */
   const {
     a11yTitle,
@@ -57,7 +63,7 @@ const StyledButton = (props) => {
     children,
     className,
     critical,
-    fill = false,
+    fill,
     hoverIndicator,
     href,
     icon,
@@ -73,13 +79,13 @@ const StyledButton = (props) => {
   /* eslint-enable */
 
   return (
-    <Button {...props}>
+    <StyledButton {...props}>
       {label}
-    </Button>
+    </StyledButton>
   )
 }
 
-StyledButton.propTypes = {
+Button.propTypes = {
   a11yTitle: PropTypes.string,
   children: PropTypes.element,
   className: PropTypes.object,
@@ -110,7 +116,7 @@ StyledButton.propTypes = {
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
 };
 
-StyledButton.defaultProps = {
+Button.defaultProps = {
   method: 'push',
   type: 'button',
   primary: true,
@@ -118,8 +124,8 @@ StyledButton.defaultProps = {
   fill: false,
 };
 
-StyledButton.contextTypes = {
+Button.contextTypes = {
   router: PropTypes.object,
 };
 
-export default StyledButton;
+export default Button;

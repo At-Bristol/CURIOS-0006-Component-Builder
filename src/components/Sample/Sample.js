@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const H1 = styled.h2`
   color: ${props => props.theme.textColor};

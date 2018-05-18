@@ -1,18 +1,8 @@
-import React from 'react'
+import React, { Children } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Box from '../Box'
-
-const Indicator = styled.div`
-  width: 15%;
-  background-color: ${props => props.shade === 'dark' ? 'black' : 'white'};
-  height: 0.3em;
-  left: ${props => `${props.position}em`};
-  bottom: 0;
-  z-index: 1;
-  position: absolute;
-`
 
 const Line = styled.div`
   width: 100%;
@@ -33,63 +23,84 @@ const GradientOverlay = styled.div`
   z-index: -1;
 `
 
-const Selector = ({
-  position,
-  shade,
-}) => (
-    <div>
-      <Indicator shade={shade} position={position}/>
-      <Line shade={shade}/>
-    </div>
-)
-
-Selector.propTypes = {
-  position: PropTypes.number,
-  shade: PropTypes.oneOf(['light', 'dark']),
-}
-
-
-const AppBar = styled.div`
-  width: 100%;
-  background-color: pink;
-  height: 60px;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  position:relative;
+const StyledAppBarButton = styled.div`
+ border-bottom: ${props => props.selected ? '5px solid white' : null};
+ flex-grow: 1;
+ height: 100%;
+ box-sizing: border-box;
 `
 
-const StyledAppBar = (props) => {
+const AppBarButton = ({ element, isSelected }) => (
+  <StyledAppBarButton selected={isSelected}>
+    <Box justify={'center'} alignItems={'center'} overflow={'hidden'} >
+     {element}
+    </Box>
+  </StyledAppBarButton>
+)
+
+AppBarButton.propTypes = {
+  isSelected: PropTypes.bool,
+  element: PropTypes.element,
+}
+
+const StyledAppBar = styled.div`
+  width: 100%;
+  background-color: ${props => props.isTransparent ? 'rgba(0,0,0,0)' : 'black'};
+  height: 60px;
+  z-index: 100;
+  position: ${props => props.fixed ? 'fixed' : 'null'};
+`
+
+const AppBar = (props) => {
   /* eslint-disable no-unused-vars */
   const {
-    shade = 'light',
-    position = 15,
+    fixed,
+    shade,
     children,
-    justify = 'around',
-    alignItems = 'center',
-    transparent = false,
+    justify,
+    alignItems,
+    isTransparent,
+    isGradient,
   } = props
   /* eslint-enable */
 
   return (
-    <AppBar>
-      <GradientOverlay />
-        <Box justify={justify} alignItems={alignItems}>
-          {children}
+    <StyledAppBar fixed={fixed} isTransparent={isTransparent}>
+      { isGradient ? <GradientOverlay /> : null }
+        <Box alignItems={'center'}>
+          {
+            Children.map(children, e => e.type.name === 'Button' ?
+              <AppBarButton
+                isSelected={e.props.isSelected}
+                element={e}
+                />
+              : e)
+          }
         </Box>
-      <Selector shade={shade} position={position}/>
-    </ AppBar>
+      <Line shade={shade}/>
+    </StyledAppBar>
   )
 }
 
-StyledAppBar.propTypes = {
+AppBar.propTypes = {
+  fixed: PropTypes.bool,
   justify: PropTypes.oneOf(['start', 'end', 'center', 'around', 'between', 'evenly']),
   alignItems: PropTypes.oneOf(['start', 'end', 'center', 'baseline', 'stretch']),
   alignContent: PropTypes.oneOf(['start', 'end', 'center', 'between', 'around', 'stretch']),
-  children: PropTypes.element,
+  children: PropTypes.node,
   position: PropTypes.number,
   shade: PropTypes.oneOf(['light', 'dark']),
-  transparent: PropTypes.bool,
+  isTransparent: PropTypes.bool,
+  isGradient: PropTypes.bool,
+  isSelected: PropTypes.bool,
 }
 
-export default StyledAppBar
+AppBar.defaultProps = {
+  fixed: true,
+  shade: 'light',
+  isTransparent: false,
+  isGradient: false,
+  isSelected: false,
+}
+
+export default AppBar

@@ -62,7 +62,7 @@ const StyledCard = (props) => {
 
 StyledCard.propTypes = {
   date: PropTypes.string,
-  children: PropTypes.element,
+  children: PropTypes.node,
   label: PropTypes.string,
   align: PropTypes.oneOf(['start', 'center', 'end']),
   box: PropTypes.bool,
