@@ -7,10 +7,9 @@ const PlainButton = styled.div`
   text-align: center;
   font-family: ${props => props.theme.font.family.bold};
   font-weight: ${props => props.theme.font.weight.bold};
-  color: ${props => props.shade === 'dark' ? 'black' : 'white'};
+  color: black;
   cursor: ${props => props.disabled ? null : 'pointer'};
 `
-
 
 const BorderedButton = styled.button`
   background-color: ${(props) => {
@@ -40,8 +39,7 @@ const BorderedButton = styled.button`
   &:active {
     transform: translate(0%, 3%)
   }
-`;
-
+`
 
 const StyledButton = props => props.plain
   ? <PlainButton {...props}>{props.label}</PlainButton>

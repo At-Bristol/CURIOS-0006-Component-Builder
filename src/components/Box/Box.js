@@ -1,20 +1,28 @@
 import React, { Children } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { spacing } from '../../lib/utils'
 
-const createMatch = (template) => {
-  const match = input => (
-    template.reduce((a, v) => v[0] === input ? v[1] : null, null)
-  )
 
-  return match
-}
+const {
+  getSpacing,
+  getSpacings,
+} = spacing
 
-createMatch([])
-
-const Box = styled.div`
-  height: 100%;
+const StyledBox = styled.div`
+  height: ${props => props.isFullscreen ? '100vh' : '100%'};
+  width: 100%;
   display: flex;
+  overflow-y: scroll;
+  padding: ${(props) => {
+    if (typeof props.padding === 'object') return getSpacings(props.padding, props)
+    return getSpacing(props.padding, props) || 0
+  }};
+  margin: ${(props) => {
+    if (typeof props.margin === 'object') return getSpacings(props.margin, props)
+    return getSpacing(props.margin, props)
+  }};
+  flex-wrap: ${props => props.wrap ? 'wrap' : 'nowrap'};
   align-items: ${(props) => {
     if (props.alignItems === 'start') return 'flex-start'
     if (props.alignItems === 'end') return 'flex-end'
@@ -23,7 +31,6 @@ const Box = styled.div`
     if (props.alignItems === 'stretch') return 'stretch'
     return 'flex-start'
   }};
-  flex-wrap: ${props => props.wrap ? 'wrap' : 'nowrap'};
   justify-content: ${(props) => {
     if (props.justify === 'start') return 'flex-start'
     if (props.justify === 'end') return 'flex-end'
@@ -33,31 +40,30 @@ const Box = styled.div`
     return 'flex-start'
   }};
   align-content: ${(props) => {
-    if (props.alignContnet === 'start') return 'flex-start'
-    if (props.alignContnet === 'end') return 'flex-end'
-    if (props.alignContnet === 'center') return 'center'
-    if (props.alignContnet === 'between') return 'space-between'
-    if (props.alignContnet === 'around') return 'space-around'
-    if (props.alignContnet === 'stretch') return 'stretch'
+    if (props.alignContent === 'start') return 'flex-start'
+    if (props.alignContent === 'end') return 'flex-end'
+    if (props.alignContent === 'center') return 'center'
+    if (props.alignContent === 'between') return 'space-between'
+    if (props.alignContent === 'around') return 'space-around'
+    if (props.alignContent === 'stretch') return 'stretch'
     return 'stretch'
   }};
 `
 
-const StyledBox = (props) => {
-  /* eslint-disable no-unused-vars */
+const Box = (props) => {
   const {
     children,
+    style,
   } = props
-  /* eslint-enable */
 
   return (
-    <Box {...props} >
+    <StyledBox {...props} style={style} >
       {Children.map(children, e => e)}
-    </ Box>
+    </ StyledBox>
   )
 }
 
-StyledBox.propTypes = {
+Box.propTypes = {
   justify: PropTypes.oneOf(['start', 'end', 'center', 'around', 'between', 'evenly']),
   size: PropTypes.oneOf(['full', 'large', 'medium', 'small']),
   alignItems: PropTypes.oneOf(['start', 'end', 'center', 'baseline', 'stretch']),
@@ -65,10 +71,15 @@ StyledBox.propTypes = {
   wrap: PropTypes.bool,
   children: PropTypes.node,
   align: PropTypes.oneOf(['center', 'start', 'end']),
+  style: PropTypes.object,
+  isFullscreen: PropTypes.bool,
 }
 
-StyledBox.defaultProps = {
+Box.defaultProps = {
   size: 'medium',
+  style: {},
+  isFullscreen: false,
+  padding: 0,
 }
 
-export default StyledBox
+export default Box

@@ -9,6 +9,9 @@ import { light as theme } from './themes'
 injectGlobal`
   body,html{
     margin:0;
+    height: 100vh;
+    overflow-y: scroll;
+    
     font-family:${theme.font.family.regular};
 
     @font-face {

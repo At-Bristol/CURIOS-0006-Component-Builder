@@ -57,12 +57,20 @@ const light = {
     inverseTextColorValue: 'white',
     imageOverlayText: 'white',
     imageOverlayGradient: 'rgba(0,0,0,0.6)',
+    primaryShade: 'white',
   },
   modifiers: {
     hoverModifier: 'hsl(+30%, +10%, -15%)',
     disableModifier: 'black',
     attentionModifier: 'black',
     inactiveModifier: 'black',
+  },
+  spacing: {
+    xs: '1%',
+    s: '3%',
+    m: '5%',
+    l: '10%',
+    xl: '20%',
   },
   backgroundColor: 'white',
 }

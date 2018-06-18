@@ -11,7 +11,7 @@ const Card = styled.div`
   width: 100%;
   margin: 0;
   float: left;
-  background-color: 'white'; 
+  background-color: white; 
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
   cursor: ${props => props.onClick ? 'pointer' : null};
   &:hover {

@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -6,11 +6,11 @@ import Box from '../Box'
 
 const Line = styled.div`
   width: 100%;
-  background-color: ${props => props.shade === 'dark' ? 'black' : 'white'};
+  background-color: black;
   height: 0.1em;
-  bottom: 0.1em;
+  bottom: 0.2em;
   z-index: 1;
-  position: absolute;
+  position: relative;
 `
 
 const GradientOverlay = styled.div`
@@ -23,84 +23,63 @@ const GradientOverlay = styled.div`
   z-index: -1;
 `
 
-const StyledAppBarButton = styled.div`
- border-bottom: ${props => props.selected ? '5px solid white' : null};
- flex-grow: 1;
- height: 100%;
- box-sizing: border-box;
-`
-
-const AppBarButton = ({ element, isSelected }) => (
-  <StyledAppBarButton selected={isSelected}>
-    <Box justify={'center'} alignItems={'center'} overflow={'hidden'} >
-     {element}
-    </Box>
-  </StyledAppBarButton>
-)
-
-AppBarButton.propTypes = {
-  isSelected: PropTypes.bool,
-  element: PropTypes.element,
-}
-
-const StyledAppBar = styled.div`
+const StyledHeader = styled.div`
   width: 100%;
-  background-color: ${props => props.isTransparent ? 'rgba(0,0,0,0)' : 'black'};
+  background-color: ${(props) => {
+    if (props.isTransparent) return 'rgba(0,0,0,0)';
+    if (props.inverted) return 'black'
+    return 'white'
+  }};
+  border-bottom:1px solid black;
   height: 60px;
   z-index: 100;
   position: ${props => props.fixed ? 'fixed' : 'null'};
 `
 
-const AppBar = (props) => {
+const Header = (props) => {
   /* eslint-disable no-unused-vars */
   const {
     fixed,
-    shade,
+    inverted,
     children,
-    justify,
-    alignItems,
     isTransparent,
     isGradient,
   } = props
   /* eslint-enable */
 
   return (
-    <StyledAppBar fixed={fixed} isTransparent={isTransparent}>
+    <StyledHeader
+      fixed={fixed}
+      isTransparent={isTransparent}
+      inverted={inverted}
+    >
       { isGradient ? <GradientOverlay /> : null }
         <Box alignItems={'center'}>
-          {
-            Children.map(children, e => e.type.name === 'Button' ?
-              <AppBarButton
-                isSelected={e.props.isSelected}
-                element={e}
-                />
-              : e)
-          }
+          { children }
         </Box>
-      <Line shade={shade}/>
-    </StyledAppBar>
+    </StyledHeader>
   )
 }
 
-AppBar.propTypes = {
+Header.propTypes = {
   fixed: PropTypes.bool,
   justify: PropTypes.oneOf(['start', 'end', 'center', 'around', 'between', 'evenly']),
   alignItems: PropTypes.oneOf(['start', 'end', 'center', 'baseline', 'stretch']),
   alignContent: PropTypes.oneOf(['start', 'end', 'center', 'between', 'around', 'stretch']),
   children: PropTypes.node,
   position: PropTypes.number,
-  shade: PropTypes.oneOf(['light', 'dark']),
+  inverted: PropTypes.bool,
   isTransparent: PropTypes.bool,
   isGradient: PropTypes.bool,
   isSelected: PropTypes.bool,
 }
 
-AppBar.defaultProps = {
+Header.defaultProps = {
   fixed: true,
-  shade: 'light',
+  inverted: false,
   isTransparent: false,
   isGradient: false,
   isSelected: false,
 }
 
-export default AppBar
+export default Header
