@@ -7,6 +7,10 @@ import NavButtonSub from './NavButtonSub'
 
 // Sidebar
 
+const Line = styled.div`
+  border-bottom: ${props => `1px solid ${props.theme.color.greyColorQuaternary}`};
+`
+
 const StyledSidebar = styled.div`
  background-color: ${props => props.theme.color.primaryShade};
  padding:0;
@@ -38,18 +42,21 @@ const Sidebar = (props) => {
                 <NavButton
                   isSelected={e.isSelected}
                   label={e.label}
+                  isSub={true}
                   key={i}
                 />
-                {
-                  e.sub.map((eb, ib) => (
-                    <NavButtonSub
-                      isVisible={e.isSelected}
-                      isSelected={eb.isSelected}
-                      label={eb.label}
-                      key={ib}
-                    />
-                    ))
-                }
+                <Line>
+                  {
+                    e.sub.map((eb, ib) => (
+                      <NavButtonSub
+                        isVisible={e.isSelected}
+                        isSelected={eb.isSelected}
+                        label={eb.label}
+                        key={ib}
+                      />
+                      ))
+                  }
+                </Line>
               </div>
             )
           }

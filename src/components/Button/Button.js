@@ -20,6 +20,8 @@ const BorderedButton = styled.button`
   font-family: ${props => props.theme.font.family.regular};
   font-size: 1.0em;
   color: ${(props) => {
+    if (props.mono && props.inverse) return props.theme.color.inverseTextColor
+    if (props.mono) return props.theme.color.textColor
     if (props.critical && props.secondary) return props.theme.color.statusColorCritical
     if (props.secondary) return props.theme.color.accentColorPrimary
     return props.theme.color.inverseTextColor
@@ -28,6 +30,8 @@ const BorderedButton = styled.button`
   padding: 0.5em 1.0em;
   border-style: solid;
   border-color: ${(props) => {
+    if (props.mono && props.inverse) return props.theme.color.inverseTextColor
+    if (props.mono) return props.theme.color.textColor
     if (props.critical) return props.theme.color.statusColorCritical
     return props.theme.color.accentColorPrimary
   }};
@@ -73,6 +77,8 @@ const Button = (props) => {
     reverse,
     secondary,
     type,
+    mono,
+    inverse,
   } = props
   /* eslint-enable */
 

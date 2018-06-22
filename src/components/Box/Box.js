@@ -37,6 +37,7 @@ const StyledBox = styled.div`
     if (props.justify === 'center') return 'center'
     if (props.justify === 'between') return 'space-between'
     if (props.justify === 'around') return 'space-around'
+    if (props.justify === 'evenly') return 'space-evenly'
     return 'flex-start'
   }};
   align-content: ${(props) => {

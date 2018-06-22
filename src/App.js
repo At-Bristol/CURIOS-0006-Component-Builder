@@ -6,6 +6,8 @@ import Header from './components/Header'
 import Tabs from './components/Tabs'
 import Title from './components/Title'
 import Notification from './components/Notification'
+import Button from './components/Button'
+import Text from './components/Text'
 
 import Body from './screens/Body'
 
@@ -13,7 +15,16 @@ class TestApp extends Component {
   render() {
     return (
       <div>
-        <Notification />
+        <Notification status={'ok'}>
+          <Text>
+            Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation
+          </Text>
+          <Button label={'Done'}/>
+        </Notification>
         <Header fixed={false}>
           <Title label={'Curious'}/>
           <Tabs

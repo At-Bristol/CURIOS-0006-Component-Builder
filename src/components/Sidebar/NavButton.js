@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Box from '../Box'
 import Heading from '../Heading'
+import Icon from '../Icon'
 
 // NavButton
 
@@ -17,20 +18,51 @@ const StyledNavButton = styled.div`
   }
 `
 
+const StateIndicator = (props) => {
+  const {
+    isSub,
+    isSelected,
+  } = props
+
+  const size = 'xxs'
+
+  if (isSub) {
+    if (isSelected) return <Icon icon={'remove'} size={size}/>
+    return <Icon icon={'add'} size={size}/>
+  }
+  return <Icon icon={'expand'} size={size}/>
+}
+
+StateIndicator.propTypes = {
+  isSelected: PropTypes.bool,
+  isSub: PropTypes.bool,
+}
+
+StateIndicator.defaultProps = {
+  isSelected: false,
+  isSub: false,
+}
+
 const NavButton = (props) => {
   const {
     label,
     isSelected,
+    isSub,
   } = props
 
   return (
     <StyledNavButton isSelected={isSelected}>
-        <Box alignItems={'center'} style={{ padding: '0.9em 1.5em' }}>
-          {
-            isSelected
-              ? <Heading tag={'h5'}>{label}</Heading>
-              : <Heading tag={'h6'} strong={false}>{label}</Heading>
-          }
+        <Box padding={{ vertical: 'm' }}>
+          <Box alignItems={'center'} justify={'between'} padding={{ horizontal: 'm' }}>
+            {
+              isSelected
+                ? <Heading tag={'h5'}>{label}</Heading>
+                : <Heading tag={'h6'} strong={false}>{label}</Heading>
+            }
+            {
+              <StateIndicator isSub={isSub} isSelected={isSelected} />
+            }
+          </Box>
         </Box>
     </StyledNavButton>
   )
@@ -39,10 +71,12 @@ const NavButton = (props) => {
 NavButton.propTypes = {
   label: PropTypes.string,
   isSelected: PropTypes.bool,
+  isSub: PropTypes.bool,
 }
 
 NavButton.defaultProps = {
   label: '',
   isSelected: false,
+  isSub: false,
 }
 export default NavButton

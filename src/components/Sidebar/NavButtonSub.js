@@ -1,16 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 
 import Box from '../Box'
 import Heading from '../Heading'
+import Icon from '../Icon'
 
 // SubNavButton
 
 const StyledNavButtonSub = styled.div`
   color: ${props => props.isSelected ? props.theme.color.brandColor : props.theme.color.textColor};
   border-left: ${props => props.isSelected ? `0.2em solid ${props.theme.color.brandColor}` : '0.2em solid rgba(0,0,0,0)'};
-  border-bottom: 1px solid ${props => props.theme.color.greyColorQuaternary}; 
   transition: all .1s; 
   width: 100%;
   cursor: pointer;
@@ -29,8 +29,15 @@ const NavButtonSub = (props) => {
 
   return (
     <StyledNavButtonSub isSelected={isSelected} isVisible={isVisible}>
-      <Box alignItems={'center'} style={{ padding: '1em 1.5em' }}>
-        <Heading tag={'h6'} strong={isSelected}>{label}</Heading>
+      <Box padding={{ vertical: 'm' }}>
+        <Box alignItems={'center'} justify={'between'} padding={{ horizontal: 'm' }}>
+          <Heading tag={'h6'} strong={isSelected}>{label}</Heading>
+          <Icon icon={'expand'} size={'xxs'} color={
+            isSelected
+              ? { stroke: props.theme.color.brandColor }
+              : null
+          }/>
+        </Box>
       </Box>
     </StyledNavButtonSub>
   )
@@ -40,6 +47,7 @@ NavButtonSub.propTypes = {
   label: PropTypes.string,
   isSelected: PropTypes.bool,
   isVisible: PropTypes.string,
+  theme: PropTypes.object,
 }
 
 NavButtonSub.defaultProps = {
@@ -49,4 +57,4 @@ NavButtonSub.defaultProps = {
 }
 
 
-export default NavButtonSub
+export default withTheme(NavButtonSub)
