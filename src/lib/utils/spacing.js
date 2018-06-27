@@ -1,10 +1,9 @@
 const getSpacing = (size, props) => {
-  if (size === 'xs') return props.theme.spacing.xs
-  if (size === 's') return props.theme.spacing.s
-  if (size === 'm') return props.theme.spacing.m
-  if (size === 'l') return props.theme.spacing.l
-  if (size === 'xl') return props.theme.spacing.xl
-  return null
+  try {
+    return props.theme.spacing[size]
+  } catch (e) {
+    return null
+  }
 };
 
 const getSpacings = (sizeObj, props) => {

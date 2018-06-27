@@ -4,14 +4,6 @@ import styled from 'styled-components'
 
 import Box from '../Box'
 
-const Line = styled.div`
-  width: 100%;
-  background-color: black;
-  height: 0.1em;
-  bottom: 0.2em;
-  z-index: 1;
-  position: relative;
-`
 
 const GradientOverlay = styled.div`
   position: absolute;
@@ -30,7 +22,7 @@ const StyledHeader = styled.div`
     if (props.inverted) return 'black'
     return 'white'
   }};
-  border-bottom:1px solid black;
+  border-bottom:${props => `1px solid ${props.theme.color.textColor}`};
   height: 60px;
   z-index: 100;
   position: ${props => props.fixed ? 'fixed' : 'null'};
@@ -54,7 +46,7 @@ const Header = (props) => {
       inverted={inverted}
     >
       { isGradient ? <GradientOverlay /> : null }
-        <Box alignItems={'center'}>
+        <Box alignItems={'center'} justify={'end'}>
           { children }
         </Box>
     </StyledHeader>

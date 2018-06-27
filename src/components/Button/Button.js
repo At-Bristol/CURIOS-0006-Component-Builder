@@ -2,19 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { color } from '../../lib/utils'
+
+const {
+  getColorFromStatus,
+} = color
+
 const PlainButton = styled.div`
   font-size: 1.0em;
   text-align: center;
   font-family: ${props => props.theme.font.family.bold};
   font-weight: ${props => props.theme.font.weight.bold};
-  color: black;
+  color: ${props => props.theme.color.textColor};
   cursor: ${props => props.disabled ? null : 'pointer'};
 `
 
 const BorderedButton = styled.button`
   background-color: ${(props) => {
     if (props.secondary) return 'transparent'
-    if (props.critical) return props.theme.color.statusColorCritical
+    if (props.status) return getColorFromStatus(props.status, props.theme.color)
     return props.theme.color.accentColorPrimary
   }};
   font-family: ${props => props.theme.font.family.regular};
@@ -22,7 +28,7 @@ const BorderedButton = styled.button`
   color: ${(props) => {
     if (props.mono && props.inverse) return props.theme.color.inverseTextColor
     if (props.mono) return props.theme.color.textColor
-    if (props.critical && props.secondary) return props.theme.color.statusColorCritical
+    if (props.status && props.secondary) return getColorFromStatus(props.status, props.theme.color)
     if (props.secondary) return props.theme.color.accentColorPrimary
     return props.theme.color.inverseTextColor
   }}; 
@@ -32,7 +38,7 @@ const BorderedButton = styled.button`
   border-color: ${(props) => {
     if (props.mono && props.inverse) return props.theme.color.inverseTextColor
     if (props.mono) return props.theme.color.textColor
-    if (props.critical) return props.theme.color.statusColorCritical
+    if (props.status) return getColorFromStatus(props.status, props.theme.color)
     return props.theme.color.accentColorPrimary
   }};
   border-width: 0.15em;
@@ -70,15 +76,6 @@ const Button = (props) => {
     href,
     icon,
     label,
-    onClick,
-    path,
-    plain,
-    primary,
-    reverse,
-    secondary,
-    type,
-    mono,
-    inverse,
   } = props
   /* eslint-enable */
 
@@ -126,6 +123,7 @@ Button.defaultProps = {
   primary: true,
   secondary: false,
   fill: false,
+  status: false,
 };
 
 Button.contextTypes = {

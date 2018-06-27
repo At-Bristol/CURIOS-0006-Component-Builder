@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 
 import Box from './components/Box'
 import Sidebar from './components/Sidebar'
-import Header from './components/Header'
+import IconSidebar from './components/IconSidebar'
+import Header, { IconBar } from './components/Header'
 import Tabs from './components/Tabs'
 import Title from './components/Title'
 import Notification from './components/Notification'
 import Button from './components/Button'
 import Text from './components/Text'
+import NotificationModal from './components/Notification/NotificationModal.jsx'
 
 import Body from './screens/Body'
 
@@ -15,7 +17,27 @@ class TestApp extends Component {
   render() {
     return (
       <div>
-        <Notification status={'ok'}>
+        <NotificationModal isVisible={false} status={'error'}>
+          <Text>
+          Lorem ipsum dolor sit amet,
+          consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation
+          </Text>
+          <Text>
+          Lorem ipsum dolor sit amet,
+          consectetur adipiscing elit,
+          </Text>
+          <Text>
+          Lorem ipsum dolor sit amet,
+          consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation
+          </Text>
+        </ NotificationModal>
+        <Notification status={'warning'} label={'Attention'} isVisible={false}>
           <Text>
             Lorem ipsum dolor sit amet,
             consectetur adipiscing elit,
@@ -34,8 +56,19 @@ class TestApp extends Component {
               { label: 'three' },
             ]}
           />
+          <IconBar content={[
+              { icon: 'share' },
+              { icon: 'menu' },
+              ]}
+          />
         </ Header>
         <Box isFullscreen={true}>
+            <IconSidebar content={[
+              { icon: 'share' },
+              { icon: 'menu' },
+              { icon: 'remove' },
+              { icon: 'add' },
+              ]}/>
             <Sidebar
             visible={true}
             content = {[

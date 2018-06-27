@@ -8,11 +8,15 @@ import Icon from '../Icon'
 
 // NavButton
 
+const Line = styled.div`
+  margin: ${props => `0 ${props.theme.spacing.m}`};
+  border-bottom: ${props => `1px solid ${props.theme.color.greyColorQuaternary}`};
+`
+
 const StyledNavButton = styled.div`
-  color: ${props => props.isSelected ? props.theme.color.textColor : props.theme.color.textColor};
+  color: ${props => props.isSelected ? props.theme.color.textColor : props.theme.color.textColor}; 
   cursor: pointer;
   border-right: 0.2em solid rgba(0,0,0,0);
-  border-bottom: 1px solid ${props => props.theme.color.greyColorQuaternary};
   &:hover {
     background-color: ${props => props.theme.color.greyColorQuinary}
   }
@@ -27,7 +31,7 @@ const StateIndicator = (props) => {
   const size = 'xxs'
 
   if (isSub) {
-    if (isSelected) return <Icon icon={'remove'} size={size}/>
+    if (isSelected) return <Icon icon={'collapse'} size={size}/>
     return <Icon icon={'add'} size={size}/>
   }
   return <Icon icon={'expand'} size={size}/>
@@ -48,22 +52,33 @@ const NavButton = (props) => {
     label,
     isSelected,
     isSub,
+    icon,
   } = props
 
   return (
     <StyledNavButton isSelected={isSelected}>
-        <Box padding={{ vertical: 'm' }}>
+        <Box padding={{ vertical: 'ml' }}>
+
           <Box alignItems={'center'} justify={'between'} padding={{ horizontal: 'm' }}>
-            {
-              isSelected
-                ? <Heading tag={'h5'}>{label}</Heading>
-                : <Heading tag={'h6'} strong={false}>{label}</Heading>
-            }
-            {
-              <StateIndicator isSub={isSub} isSelected={isSelected} />
-            }
+            <Box alignItems={'center'}>
+              { icon
+                  ? <Icon icon={icon} size={'xs'}/>
+                  : null
+              }
+              <Box padding={icon ? 'm' : ''}>
+                {
+                  isSelected
+                    ? <Heading tag={'h5'}>{label}</Heading>
+                    : <Heading tag={'h5'} strong={false}>{label}</Heading>
+                }
+              </ Box>
+            </Box >
+              {
+                <StateIndicator isSub={isSub} isSelected={isSelected} />
+              }
           </Box>
         </Box>
+        <Line />
     </StyledNavButton>
   )
 }
@@ -72,11 +87,13 @@ NavButton.propTypes = {
   label: PropTypes.string,
   isSelected: PropTypes.bool,
   isSub: PropTypes.bool,
+  icon: PropTypes.string,
 }
 
 NavButton.defaultProps = {
   label: '',
   isSelected: false,
   isSub: false,
+  icon: null,
 }
 export default NavButton

@@ -32,7 +32,7 @@ Text.propTypes = {
 }
 
 Text.defaultProps = {
-  padding: { horizontal: 's' },
+  padding: false,
 }
 
 export default Text

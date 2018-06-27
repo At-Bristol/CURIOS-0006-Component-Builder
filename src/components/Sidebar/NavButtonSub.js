@@ -4,12 +4,12 @@ import styled, { withTheme } from 'styled-components'
 
 import Box from '../Box'
 import Heading from '../Heading'
-import Icon from '../Icon'
 
 // SubNavButton
 
 const StyledNavButtonSub = styled.div`
   color: ${props => props.isSelected ? props.theme.color.brandColor : props.theme.color.textColor};
+  background-color: ${props => props.isSelected ? props.theme.color.greyColorQuinary : null}; ;
   border-left: ${props => props.isSelected ? `0.2em solid ${props.theme.color.brandColor}` : '0.2em solid rgba(0,0,0,0)'};
   transition: all .1s; 
   width: 100%;
@@ -29,14 +29,9 @@ const NavButtonSub = (props) => {
 
   return (
     <StyledNavButtonSub isSelected={isSelected} isVisible={isVisible}>
-      <Box padding={{ vertical: 'm' }}>
+      <Box padding={{ vertical: 'ms' }}>
         <Box alignItems={'center'} justify={'between'} padding={{ horizontal: 'm' }}>
           <Heading tag={'h6'} strong={isSelected}>{label}</Heading>
-          <Icon icon={'expand'} size={'xxs'} color={
-            isSelected
-              ? { stroke: props.theme.color.brandColor }
-              : null
-          }/>
         </Box>
       </Box>
     </StyledNavButtonSub>

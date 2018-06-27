@@ -13,7 +13,7 @@ const sizes = (x) => {
   return '1.5em'
 }
 
-const getColor = color => ({ fill: color, stroke: color })
+const getColorFromStatus = color => ({ fill: color, stroke: color })
 
 const Container = styled.div`
   display: flex;
@@ -33,11 +33,12 @@ const Icon = (props) => {
   let oColor
 
   if (typeof color === 'string') {
-    oColor = getColor(color)
-    oColor = inverse ? getColor(props.theme.color.inverseTextColor) : oColor
+    oColor = getColorFromStatus(color)
   } else {
     oColor = color
   }
+
+  oColor = inverse ? getColorFromStatus(props.theme.color.inverseTextColor) : oColor
 
   let combinedProps
 
@@ -70,7 +71,7 @@ const Icon = (props) => {
       >
         <path
           d={d}
-          fill={ oColor ? oColor.fill : fill}
+          fill={oColor ? oColor.fill : fill }
           stroke={oColor ? oColor.stroke : stroke}
           strokeLinecap={strokeLinecap}
           strokeLinejoin={strokeLinejoin}
@@ -92,7 +93,7 @@ Icon.propTypes = {
 Icon.defaultProps = {
   size: 's',
   icon: 'warningOutline',
-  color: '',
+  color: null,
 }
 
 export default withTheme(Icon)

@@ -8,13 +8,14 @@ import NavButtonSub from './NavButtonSub'
 // Sidebar
 
 const Line = styled.div`
+  margin: ${props => `0 ${props.theme.spacing.m}`};
   border-bottom: ${props => `1px solid ${props.theme.color.greyColorQuaternary}`};
 `
 
 const StyledSidebar = styled.div`
  background-color: ${props => props.theme.color.primaryShade};
- padding:0;
- max-width: ${props => props.visible ? '250px' : 0};
+ min-width: ${props => props.visible ? '250px' : 0};
+ max-width: ${props => props.visible ? '330px' : 0};
  height: 100%;
  width: 100%;
  border-right : 1px solid ${props => props.theme.color.greyColorPrimary};
@@ -45,7 +46,6 @@ const Sidebar = (props) => {
                   isSub={true}
                   key={i}
                 />
-                <Line>
                   {
                     e.sub.map((eb, ib) => (
                       <NavButtonSub
@@ -56,7 +56,7 @@ const Sidebar = (props) => {
                       />
                       ))
                   }
-                </Line>
+                <Line />
               </div>
             )
           }

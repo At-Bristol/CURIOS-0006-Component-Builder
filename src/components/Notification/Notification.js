@@ -6,6 +6,12 @@ import Box from '../Box'
 import Icon from '../Icon'
 import Heading from '../Heading'
 
+import { icon } from '../../lib/utils'
+
+const {
+  getIcon,
+} = icon
+
 const StyledNotification = styled.div`
   position: fixed;
   top: ${props => props.top ? 0 : null};
@@ -13,7 +19,7 @@ const StyledNotification = styled.div`
   width: 100%;
   overflow-y: hidden;
   max-height: ${props => props.isVisible ? null : 0}
-  z-index:100000;
+  z-index:100;
   background-color: ${(props) => {
     if (props.status === 'ok') return props.theme.color.statusColorOk
     if (props.status === 'warning') return props.theme.color.statusColorWarning
@@ -34,17 +40,6 @@ const Notification = (props) => {
     status,
     children,
   } = props
-
-  const getIcon = (s) => {
-    if (s === 'ok') return 'okOutline'
-    if (s === 'warning') return 'warningOutline'
-    if (s === 'error') return 'errorOutline'
-    if (s === 'unknown') return 'unknownOutline'
-    if (s === 'disabled') return 'disabled'
-    if (s === 'critical') return 'criticalOutline'
-    return null
-  }
-
 
   return (
     <StyledNotification top={top} isVisible={isVisible} status={status} >

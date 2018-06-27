@@ -9,8 +9,12 @@ const {
   getSpacings,
 } = spacing
 
-const H1 = styled.h1`
-  font-size: 5.0em;
+const StyledHeading = styled.h1`
+  color: ${(props) => {
+    if (props.inverse) return props.theme.color.inverseTextColor
+    if (props.color) return props.color
+    return props.theme.color.textColor
+  }};
   font-family: ${props => props.strong ? props.theme.font.family.heavy : props.theme.font.family.regular};
   font-weight: ${props => props.strong ? props.theme.font.weight.heavy : props.theme.font.weight.regular};
   margin: 0;
@@ -26,89 +30,28 @@ const H1 = styled.h1`
   }};
 `
 
-const H2 = styled.h2`
+const H1 = StyledHeading.extend`
+  font-size: 5.0em;
+`
+
+const H2 = StyledHeading.extend`
   font-size: 4.0em;
-  font-family: ${props => props.strong ? props.theme.font.family.heavy : props.theme.font.family.regular};
-  font-weight: ${props => props.strong ? props.theme.font.weight.heavy : props.theme.font.weight.regular};
-  margin:0;
-  text-transform: ${props => props.uppercase ? 'uppercase' : null};
-  text-overflow: ${props => props.truncate ? 'ellipsis' : null};
-  padding: ${(props) => {
-    if (typeof props.padding === 'object') return getSpacings(props.padding, props)
-    return getSpacing(props.padding, props) || 0
-  }};
-  margin: ${(props) => {
-    if (typeof props.margin === 'object') return getSpacings(props.margin, props)
-    return getSpacing(props.margin, props)
-  }};
 `
 
-const H3 = styled.h3`
+const H3 = StyledHeading.extend`
   font-size: 3.0em;
-  font-family: ${props => props.strong ? props.theme.font.family.bold : props.theme.font.family.light};
-  font-weight: ${props => props.strong ? props.theme.font.weight.bold : props.theme.font.weight.light};
-  margin:0;
-  text-transform: ${props => props.uppercase ? 'uppercase' : null};
-  text-overflow: ${props => props.truncate ? 'ellipsis' : null};
-  padding: ${(props) => {
-    if (typeof props.padding === 'object') return getSpacings(props.padding, props)
-    return getSpacing(props.padding, props) || 0
-  }};
-  margin: ${(props) => {
-    if (typeof props.margin === 'object') return getSpacings(props.margin, props)
-    return getSpacing(props.margin, props)
-  }};
 `
 
-const H4 = styled.h4`
+const H4 = StyledHeading.extend`
   font-size: 2.0em;
-  font-family: ${props => props.strong ? props.theme.font.family.bold : props.theme.font.family.light};
-  font-weight: ${props => props.strong ? props.theme.font.weight.bold : props.theme.font.weight.light};
-  margin:0;
-  padding:0;
-  text-overflow: ${props => props.truncate ? 'ellipsis' : null};
-  padding: ${(props) => {
-    if (typeof props.padding === 'object') return getSpacings(props.padding, props)
-    return getSpacing(props.padding, props) || 0
-  }};
-  margin: ${(props) => {
-    if (typeof props.margin === 'object') return getSpacings(props.margin, props)
-    return getSpacing(props.margin, props)
-  }};
 `
 
-const H5 = styled.h5`
-  font-size: 1.5em;
-  font-family: ${props => props.strong ? props.theme.font.family.bold : props.theme.font.family.light};
-  font-weight: ${props => props.strong ? props.theme.font.weight.bold : props.theme.font.weight.light};
-  margin:0;
-  text-transform: ${props => props.uppercase ? 'uppercase' : null};
-  text-overflow: ${props => props.truncate ? 'ellipsis' : null};
-  padding: ${(props) => {
-    if (typeof props.padding === 'object') return getSpacings(props.padding, props)
-    return getSpacing(props.padding, props) || 0
-  }};
-  margin: ${(props) => {
-    if (typeof props.margin === 'object') return getSpacings(props.margin, props)
-    return getSpacing(props.margin, props)
-  }};
+const H5 = StyledHeading.extend`
+  font-size: 1.3em;
 `
 
-const H6 = styled.h6`
-  font-size: 1.0em;
-  font-family: ${props => props.strong ? props.theme.font.family.bold : props.theme.font.family.light};
-  font-weight: ${props => props.strong ? props.theme.font.weight.bold : props.theme.font.weight.light};
-  margin:0;
-  text-transform: ${props => props.uppercase ? 'uppercase' : null};
-  text-overflow: ${props => props.truncate ? 'ellipsis' : null};
-  padding: ${(props) => {
-    if (typeof props.padding === 'object') return getSpacings(props.padding, props)
-    return getSpacing(props.padding, props) || 0
-  }};
-  margin: ${(props) => {
-    if (typeof props.margin === 'object') return getSpacings(props.margin, props)
-    return getSpacing(props.margin, props)
-  }};
+const H6 = StyledHeading.extend`
+  font-size: 0.9em;
 `
 
 const getTag = (tag) => {
@@ -122,7 +65,7 @@ const getTag = (tag) => {
 }
 
 
-const StyledHeading = (props) => {
+const Heading = (props) => {
   const {
     children,
     strong,
@@ -130,18 +73,25 @@ const StyledHeading = (props) => {
     invert,
     style,
     padding,
+    color,
   } = props
 
   const Tag = getTag(tag)
 
   return (
-    <Tag strong={strong} invert={invert} style={style} padding={padding}>
+    <Tag
+      strong={strong}
+      invert={invert}
+      style={style}
+      padding={padding}
+      color={color}
+    >
       {children}
     </Tag>
   );
 }
 
-StyledHeading.propTypes = {
+Heading.propTypes = {
   align: PropTypes.oneOf(['start', 'center', 'end']),
   margin: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
@@ -153,13 +103,14 @@ StyledHeading.propTypes = {
   children: PropTypes.node,
   style: PropTypes.object,
   padding: PropTypes.string,
+  color: PropTypes.color,
 }
 
-StyledHeading.defaultProps = {
+Heading.defaultProps = {
   invert: false,
   strong: true,
   padding: 0,
   style: {},
 }
 
-export default StyledHeading
+export default Heading

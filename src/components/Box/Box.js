@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { spacing } from '../../lib/utils'
 
-
 const {
   getSpacing,
   getSpacings,
@@ -12,6 +11,7 @@ const {
 const StyledBox = styled.div`
   height: ${props => props.isFullscreen ? '100vh' : '100%'};
   width: 100%;
+  box-sizing: border-box;
   display: flex;
   overflow-y: scroll;
   padding: ${(props) => {
@@ -21,6 +21,18 @@ const StyledBox = styled.div`
   margin: ${(props) => {
     if (typeof props.margin === 'object') return getSpacings(props.margin, props)
     return getSpacing(props.margin, props)
+  }};
+  flex-direction: ${(props) => {
+    if (!props.reverse && !props.column) return 'row'
+    if (props.reverse && !props.column) return 'rowReverse'
+    if (!props.reverse && props.column) return 'column'
+    if (props.reverse && props.column) return 'columnReverse'
+    return 'row'
+  }};
+  flex-basis: ${(props) => {
+    if (props.basis === 'content') return 'content'
+    if (props.basis) return props.basis
+    return 'auto'
   }};
   flex-wrap: ${props => props.wrap ? 'wrap' : 'nowrap'};
   align-items: ${(props) => {
@@ -81,6 +93,7 @@ Box.defaultProps = {
   style: {},
   isFullscreen: false,
   padding: 0,
+  wrap: false,
 }
 
 export default Box
