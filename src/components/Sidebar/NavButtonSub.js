@@ -29,7 +29,7 @@ const NavButtonSub = (props) => {
 
   return (
     <StyledNavButtonSub isSelected={isSelected} isVisible={isVisible}>
-      <Box padding={{ vertical: 'ms' }}>
+      <Box padding={{ vertical: 's' }}>
         <Box alignItems={'center'} justify={'between'} padding={{ horizontal: 'm' }}>
           <Heading tag={'h6'} strong={isSelected}>{label}</Heading>
         </Box>

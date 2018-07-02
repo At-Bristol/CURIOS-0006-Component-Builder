@@ -8,8 +8,8 @@ import Box from '../Box'
 const StyledIconSidebar = styled.div`
   background-color: ${props => props.theme.color.greyColorTertiary};
   height: 100%;
-  width: 100%;
-  max-width: 60px;
+  min-width: 3.5em;
+  max-width: 3.5em;
   transition: all 1s; 
   overflow: hidden;
 `
@@ -30,7 +30,7 @@ const IconSidebar = (props) => {
             icon={e.icon}
             onClick={e.onClick}
             key={i}
-            padding={ 'xl' }
+            padding={ 's' }
           />
         ))
       }

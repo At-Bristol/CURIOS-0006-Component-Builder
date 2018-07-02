@@ -6,6 +6,7 @@ import Card from '../components/Card'
 import Text from '../components/Text'
 import Grid from '../components/Grid'
 import Hero from '../components/Hero'
+import Value from '../components/Value'
 
 import horizon from '../assets/img/horizon.jpg'
 import vertical from '../assets/img/vertical.jpg'
@@ -13,6 +14,8 @@ import vertical from '../assets/img/vertical.jpg'
 const Body = () => (
   <div>
     <Hero image={horizon} label={'Hero Image'} imagePos={'center bottom'}/>
+
+    <Value />
 
     <Heading tag='h1'>Heading H1</Heading>
     <Heading tag='h2'>Heading H2</Heading>

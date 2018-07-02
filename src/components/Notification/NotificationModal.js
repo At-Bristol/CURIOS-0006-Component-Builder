@@ -39,9 +39,11 @@ const NotificationModal = (props) => {
               size={'s'}
               color={getColorFromStatus(status, theme.color)}
             />
-            <Heading tag='h4' color={getColorFromStatus(status, theme.color)}>
-              {label || status}
-            </Heading>
+            <Box fill={false} padding={{ horizontal: 's' }}>
+              <Heading tag='h4' color={getColorFromStatus(status, theme.color)}>
+                {label || status}
+              </Heading>
+            </ Box>
           </ Box>
           <Icon
             icon={'close'}

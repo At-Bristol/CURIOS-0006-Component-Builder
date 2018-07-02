@@ -10,9 +10,10 @@ const {
 
 const StyledBox = styled.div`
   height: ${props => props.isFullscreen ? '100vh' : '100%'};
-  width: 100%;
-  box-sizing: border-box;
+  width: ${props => props.fill ? '100%' : false};
+  box-sizing: ${props => props.fill ? 'border-box' : null};
   display: flex;
+  position: ${props => props.position};
   overflow-y: scroll;
   padding: ${(props) => {
     if (typeof props.padding === 'object') return getSpacings(props.padding, props)
@@ -86,6 +87,7 @@ Box.propTypes = {
   align: PropTypes.oneOf(['center', 'start', 'end']),
   style: PropTypes.object,
   isFullscreen: PropTypes.bool,
+  fill: PropTypes.bool,
 }
 
 Box.defaultProps = {
@@ -94,6 +96,7 @@ Box.defaultProps = {
   isFullscreen: false,
   padding: 0,
   wrap: false,
+  fill: true,
 }
 
 export default Box

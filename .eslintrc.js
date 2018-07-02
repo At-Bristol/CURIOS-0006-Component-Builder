@@ -20,7 +20,7 @@ module.exports = {
     ],
     "rules": {
         "class-methods-use-this": 0,
-        "semi":0,
+        "semi":["error", "never"],
         "no-confusing-arrow":0.
     }
 };

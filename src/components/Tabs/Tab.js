@@ -5,12 +5,13 @@ import PropTypes from 'prop-types'
 import Box from '../Box'
 import Button from '../Button'
 
-const StyledTab = styled.div`
-  border-bottom: ${props => props.selected ? `3px solid ${props.theme.color.textColor}` : null};
-  flex-grow: 1;
-  height: 100%;
-  box-sizing: border-box;
-  cursor: pointer;
+const Line = styled.div`
+  height: 3px;
+  width: 100%;
+  background-color: ${props => props.theme.color.textColor};
+  position: absolute;
+  left: 0;
+  bottom: 0;
 `
 
 const Tab = (props) => {
@@ -20,11 +21,12 @@ const Tab = (props) => {
   } = props
 
   return (
-    <StyledTab selected={isSelected}>
+    <Box position={'relative'}>
       <Box alignItems={'center'} justify={'center'}>
         <Button label={label} plain={true}/>
       </Box>
-    </StyledTab>
+      { isSelected ? <Line /> : null }
+    </Box>
   )
 }
 

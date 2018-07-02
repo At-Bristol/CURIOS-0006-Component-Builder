@@ -22,7 +22,7 @@ const IconBar = (props) => {
             key={i}
             icon={e.icon}
             onClick={e.onClick}
-            padding={{ horizontal: 'xl' }}
+            padding={{ horizontal: 'xs' }}
             size={'xs'}
           />
         ))

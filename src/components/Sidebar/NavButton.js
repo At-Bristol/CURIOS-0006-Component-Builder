@@ -9,7 +9,7 @@ import Icon from '../Icon'
 // NavButton
 
 const Line = styled.div`
-  margin: ${props => `0 ${props.theme.spacing.m}`};
+  margin: ${props => `0 ${props.theme.spacing.s}`};
   border-bottom: ${props => `1px solid ${props.theme.color.greyColorQuaternary}`};
 `
 
@@ -57,15 +57,15 @@ const NavButton = (props) => {
 
   return (
     <StyledNavButton isSelected={isSelected}>
-        <Box padding={{ vertical: 'ml' }}>
+        <Box padding={{ vertical: 'ms' }}>
 
-          <Box alignItems={'center'} justify={'between'} padding={{ horizontal: 'm' }}>
+          <Box alignItems={'center'} justify={'between'} padding={{ horizontal: 's' }}>
             <Box alignItems={'center'}>
               { icon
                   ? <Icon icon={icon} size={'xs'}/>
                   : null
               }
-              <Box padding={icon ? 'm' : ''}>
+              <Box padding={icon ? 's' : ''}>
                 {
                   isSelected
                     ? <Heading tag={'h5'}>{label}</Heading>

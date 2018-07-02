@@ -8,7 +8,7 @@ import NavButtonSub from './NavButtonSub'
 // Sidebar
 
 const Line = styled.div`
-  margin: ${props => `0 ${props.theme.spacing.m}`};
+  margin: ${props => `0 ${props.theme.spacing.s}`};
   border-bottom: ${props => `1px solid ${props.theme.color.greyColorQuaternary}`};
 `
 

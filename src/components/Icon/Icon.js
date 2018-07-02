@@ -13,7 +13,12 @@ const sizes = (x) => {
   return '1.5em'
 }
 
-const getColorFromStatus = color => ({ fill: color, stroke: color })
+const getColorFromStatus = (color, fill, stroke) => (
+  {
+    fill: fill === 'none' ? 'none' : color,
+    stroke: stroke === 'none' ? 'none' : color,
+  }
+)
 
 const Container = styled.div`
   display: flex;
@@ -38,7 +43,15 @@ const Icon = (props) => {
     oColor = color
   }
 
-  oColor = inverse ? getColorFromStatus(props.theme.color.inverseTextColor) : oColor
+  oColor = inverse
+    ? getColorFromStatus(
+      props.theme.color.inverseTextColor,
+      props.theme.icon[icon].svg.fill || props.theme.icon.defaults.fill,
+      /* eslint-disable */
+      props.theme.icon[icon].svg.stroke || props.theme.icon.defaults.stroke
+      /* eslint-enable */
+    )
+    : oColor
 
   let combinedProps
 
@@ -49,6 +62,7 @@ const Icon = (props) => {
       ...props.theme.icon[icon].svg.path,
     }
   } catch (e) {
+    combinedProps = {}
     console.warn(`icon ${icon} not found`)
   }
 
@@ -64,21 +78,23 @@ const Icon = (props) => {
   } = combinedProps
 
   return (
-    <Container size={size}>
-      <svg
-        viewBox={viewBox}
-        xmlns={xmlns}
-      >
-        <path
-          d={d}
-          fill={oColor ? oColor.fill : fill }
-          stroke={oColor ? oColor.stroke : stroke}
-          strokeLinecap={strokeLinecap}
-          strokeLinejoin={strokeLinejoin}
-          strokeWidth={strokeWidth}
-        />
-      </svg>
-    </Container>
+    icon
+      ? <Container size={size}>
+        <svg
+          viewBox={viewBox}
+          xmlns={xmlns}
+        >
+          <path
+            d={d}
+            fill={oColor ? oColor.fill : fill }
+            stroke={oColor ? oColor.stroke : stroke}
+            strokeLinecap={strokeLinecap}
+            strokeLinejoin={strokeLinejoin}
+            strokeWidth={strokeWidth}
+          />
+        </svg>
+      </Container>
+      : null
   )
 }
 

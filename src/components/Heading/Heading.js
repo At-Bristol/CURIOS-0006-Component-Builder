@@ -1,15 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-import { spacing } from '../../lib/utils'
+import Box from '../Box'
 
-const {
-  getSpacing,
-  getSpacings,
-} = spacing
-
-const StyledHeading = styled.h1`
+const StyledHeading = styled.div`
   color: ${(props) => {
     if (props.inverse) return props.theme.color.inverseTextColor
     if (props.color) return props.color
@@ -18,16 +13,9 @@ const StyledHeading = styled.h1`
   font-family: ${props => props.strong ? props.theme.font.family.heavy : props.theme.font.family.regular};
   font-weight: ${props => props.strong ? props.theme.font.weight.heavy : props.theme.font.weight.regular};
   margin: 0;
+  padding: 0;
   text-transform: ${props => props.uppercase ? 'uppercase' : null};
   text-overflow: ${props => props.truncate ? 'ellipsis' : null};
-  padding: ${(props) => {
-    if (typeof props.padding === 'object') return getSpacings(props.padding, props)
-    return getSpacing(props.padding, props) || 0
-  }};
-  margin: ${(props) => {
-    if (typeof props.margin === 'object') return getSpacings(props.margin, props)
-    return getSpacing(props.margin, props)
-  }};
 `
 
 const H1 = StyledHeading.extend`
@@ -61,7 +49,7 @@ const getTag = (tag) => {
   if (tag === 'h4') return H4
   if (tag === 'h5') return H5
   if (tag === 'h6') return H6
-  return tag
+  return 'h1'
 }
 
 
@@ -72,29 +60,21 @@ const Heading = (props) => {
     tag,
     invert,
     style,
-    padding,
     color,
   } = props
 
   const Tag = getTag(tag)
 
   return (
-    <Tag
-      strong={strong}
-      invert={invert}
-      style={style}
-      padding={padding}
-      color={color}
-    >
-      {children}
-    </Tag>
-  );
+    <Box {...props} fill={false}>
+      <Tag strong={strong} invert={invert} style={style} color={color}>
+          {children}
+      </Tag>
+    </Box>
+  )
 }
 
 Heading.propTypes = {
-  align: PropTypes.oneOf(['start', 'center', 'end']),
-  margin: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
   strong: PropTypes.bool,
   tag: PropTypes.string,
   truncate: PropTypes.bool,
@@ -109,8 +89,6 @@ Heading.propTypes = {
 Heading.defaultProps = {
   invert: false,
   strong: true,
-  padding: 0,
-  style: {},
 }
 
 export default Heading

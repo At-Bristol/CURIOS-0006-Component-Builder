@@ -9,7 +9,6 @@ import Title from './components/Title'
 import Notification from './components/Notification'
 import Button from './components/Button'
 import Text from './components/Text'
-import NotificationModal from './components/Notification/NotificationModal.jsx'
 
 import Body from './screens/Body'
 
@@ -17,7 +16,7 @@ class TestApp extends Component {
   render() {
     return (
       <div>
-        <NotificationModal isVisible={false} status={'error'}>
+        <Notification isVisible={false} status={'warning'}>
           <Text>
           Lorem ipsum dolor sit amet,
           consectetur adipiscing elit,
@@ -36,8 +35,8 @@ class TestApp extends Component {
           ut labore et dolore magna aliqua.
           Ut enim ad minim veniam, quis nostrud exercitation
           </Text>
-        </ NotificationModal>
-        <Notification status={'warning'} label={'Attention'} isVisible={false}>
+        </ Notification>
+        <Notification status={'ok'} label={'Attention'} isVisible={true}>
           <Text>
             Lorem ipsum dolor sit amet,
             consectetur adipiscing elit,
