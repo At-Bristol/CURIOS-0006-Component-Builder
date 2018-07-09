@@ -16,7 +16,7 @@ class TestApp extends Component {
   render() {
     return (
       <div>
-        <Notification isVisible={false} status={'warning'}>
+        <Notification isVisible={false} isModal={true} status={'warning'}>
           <Text>
           Lorem ipsum dolor sit amet,
           consectetur adipiscing elit,

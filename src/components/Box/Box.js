@@ -10,7 +10,7 @@ const {
 
 const StyledBox = styled.div`
   height: ${props => props.isFullscreen ? '100vh' : '100%'};
-  width: ${props => props.fill ? '100%' : false};
+  width: ${props => props.fill ? '100%' : null};
   box-sizing: ${props => props.fill ? 'border-box' : null};
   display: flex;
   position: ${props => props.position};

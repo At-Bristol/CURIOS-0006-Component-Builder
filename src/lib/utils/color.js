@@ -1,11 +1,12 @@
-const getColorFromStatus = (status, color) => {
-  if (status === 'critical') return color.statusColorCritical
-  if (status === 'ok') return color.statusColorOk
-  if (status === 'warning') return color.statusColorWarning
-  if (status === 'error') return color.statusColorError
-  if (status === 'disabled') return color.statusColorDisabled
-  if (status === 'unknown') return color.statusColorUnknown
-  return color.accentColorPrimary
+const getColorFromStatus = (status, colorObj, defaultColor) => {
+  if (status === 'critical') return colorObj.statusColorCritical
+  if (status === 'ok') return colorObj.statusColorOk
+  if (status === 'warning') return colorObj.statusColorWarning
+  if (status === 'error') return colorObj.statusColorError
+  if (status === 'disabled') return colorObj.statusColorDisabled
+  if (status === 'unknown') return colorObj.statusColorUnknown
+  if (defaultColor) return defaultColor
+  return colorObj.accentColorPrimary
 }
 
 export default {

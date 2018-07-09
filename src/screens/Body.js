@@ -7,6 +7,7 @@ import Text from '../components/Text'
 import Grid from '../components/Grid'
 import Hero from '../components/Hero'
 import Value from '../components/Value'
+import { Toggle, Radio, Slider, Input } from '../components/Input'
 
 import horizon from '../assets/img/horizon.jpg'
 import vertical from '../assets/img/vertical.jpg'
@@ -14,6 +15,11 @@ import vertical from '../assets/img/vertical.jpg'
 const Body = () => (
   <div>
     <Hero image={horizon} label={'Hero Image'} imagePos={'center bottom'}/>
+
+    <Input />
+    <Toggle />
+    <Radio />
+    <Slider />
 
     <Value />
 

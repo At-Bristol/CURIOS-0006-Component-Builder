@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 import { withTheme } from 'styled-components';
 
-import Modal from '../Modal';
-import Heading from '../Heading';
-import Button from '../Button';
+import Modal from '../Modal'
+import Heading from '../Heading'
+import Button from '../Button'
 import Text from '../Text'
 import Box from '../Box'
 import Icon from '../Icon'
