@@ -2,10 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { withTheme } from 'styled-components'
 
-import Box from '../Box'
-import Icon from '../Icon'
+import Feedback from './Feedback'
 
-import { color, icon } from '../../lib/utils'
+import { color, icon } from '../../../lib/utils'
 
 const hasContent = (content) => {
   const getLength = string => string.length
@@ -37,7 +36,7 @@ const getSizing = (size, scale) => {
   if (size === 'ml') oSize = 2.75
   if (size === 'l') oSize = 3
   if (size === 'xl') oSize = 4
-  if (size === 'xxl') oSize = 5
+  if (size === 'xxl') oSize = 6
 
   return `${oSize * oScale}rem`
 }
@@ -56,7 +55,7 @@ const StyledBar = styled.span`
   &:before, 
   &:after {
     content:'';
-    height:${props => getSizing(props.size, 0.1)};; 
+    height:${props => getSizing(props.size, 0.05)}; 
     width:0;
     bottom:0; 
     position:absolute;
@@ -66,16 +65,10 @@ const StyledBar = styled.span`
 
 `
 
-const StyledFeedback = styled.div`
-  padding-left: 0;
-  padding-top: ${props => getSizing(props.size, 0.25)};
-  color: ${props => props.color ? props.color : props.theme.color.textColor};
-`
-
 const StyledLabel = styled.div`
   color: ${props => props.isDisabled ? props.color : props.theme.color.textColor}; 
   box-sizing:border-box;
-  font-size: ${props => getSizing(props.size, 0.5)};
+  font-size: ${props => getSizing(props.size, 0.55)};
   position:absolute;
   pointer-events:none;
   top: ${props => getSizing(props.size, 0.25)};
@@ -95,11 +88,11 @@ const StyledInput = styled.input`
   box-shadow: none;
   color: ${props => props.isDisabled ? props.color : null};
   top: ${props => hasContent(props.content) ? getSizing(props.size, -0.5) : null};
-  font-size: ${props => hasContent(props.content) ? getSizing(props.size, 0.45) : null};
+  font-size: ${props => getSizing(props.size, 0.55)};
 
   &:focus ~ ${StyledLabel} {
-    top: ${props => getSizing(props.size, -0.7)};
-    font-size: ${props => getSizing(props.size, 0.45)};
+    top: ${props => getSizing(props.size, -0.50)};
+    font-size: ${props => getSizing(props.size, 0.475)};
     color:${props => props.color ? props.color : props.theme.color.brandColor};
   }
 
@@ -109,38 +102,6 @@ const StyledInput = styled.input`
   } 
 `
 
-const Feedback = (props) => {
-  const {
-    color,
-    size,
-    feedback,
-    icon
-  } = props
-
-  return (
-    <StyledFeedback {...props}>
-      <Box alignItems={'center'}>
-        <Icon icon={icon} size='xxs' color={color} />
-        <Box fill={false} padding={{ horizontal: 'xxs' }}/>
-        {feedback}
-      </Box>
-    </StyledFeedback>
-  )
-}
-
-Feedback.defaultProps = {
-  color: null,
-  size: null,
-  feedback: null,
-}
-
-Feedback.propTypes = {
-  color: PropTypes.string,
-  size: PropTypes.string,
-  feedback: PropTypes.string,
-}
-
-
 const Input = (props) => {
   const {
     isDisabled,
@@ -149,11 +110,12 @@ const Input = (props) => {
     feedback,
     label,
     size,
-    content
+    content,
   } = props
 
   const getStatusFromProps = () => {
     if (isDisabled) return 'disabled'
+    if (isRequired && !content) return 'warning'
     if (isValid) return 'ok'
     return 'critical'
   }
@@ -167,8 +129,9 @@ const Input = (props) => {
   const statusIcon = icon.getIcon(getIconFromProps())
 
   const statusColor = color.getColorFromStatus(
-    getStatusFromProps(), 
+    getStatusFromProps(),
     props.theme.color,
+    // eslint-disable-next-line
     props.theme.brandColor
   )
 
@@ -195,12 +158,12 @@ const Input = (props) => {
 
 Input.defaultProps = {
   isValid: false,
-  isRequired: false,
+  isRequired: true,
   isDisabled: false,
-  content: 'thing',
+  content: 'fifjsdoif',
   label: 'Email',
   size: 's',
-  feedback: 'this is not a valid email address',
+  feedback: 'This is not a valid email address',
 }
 
 Input.propTypes = {
@@ -211,6 +174,7 @@ Input.propTypes = {
   label: PropTypes.string,
   size: PropTypes.string,
   feedback: PropTypes.string,
+  theme: PropTypes.object,
 }
 
 export default withTheme(Input)
