@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Image = styled.div`
   background-image: ${props => `url(${props.image})`};

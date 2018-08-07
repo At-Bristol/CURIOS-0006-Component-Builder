@@ -3,22 +3,43 @@ import PropTypes from 'prop-types'
 
 import ListItem from './ListItem'
 
+/**
+ * List component for recursivley rendering Lists and Sub lists
+ * @name Notification
+ * @param {[]} content - Array of content
+ * @param {[]} components - (TODO) Array of components to be rendered at each level.
+ * If no component exists for level the last component in the array will be used.
+*/
+
 const List = (props) => {
   const {
     content,
   } = props
 
   return (
-    content.map((e, i) => <ListItem key={i} {...e.props} />)
+    <div>
+      {
+        content.map((e, i) => (
+          <div key={i}>
+            <ListItem {...e} />
+            {
+              e.sub && e.isSelected ?
+                <List content={e.sub}/>
+                : null
+            }
+          </div>
+        ))
+      }
+    </div>
   )
-}
-
-List.propTypes = {
-  content: PropTypes.array,
 }
 
 List.defaultProps = {
   content: [],
+}
+
+List.propTypes = {
+  content: PropTypes.array,
 }
 
 export default List

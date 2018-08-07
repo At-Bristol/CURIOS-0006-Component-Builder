@@ -23,11 +23,16 @@ const Tab = (props) => {
   return (
     <Box position={'relative'}>
       <Box alignItems={'center'} justify={'center'}>
-        <Button label={label} plain={true}/>
+        <Button label={label} isPlain={true}/>
       </Box>
       { isSelected ? <Line /> : null }
     </Box>
   )
+}
+
+Tab.defaultProps = {
+  isSelected: false,
+  label: null,
 }
 
 Tab.propTypes = {

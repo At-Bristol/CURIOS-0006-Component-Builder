@@ -1,6 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import styled from 'styled-components'
 
 import Heading from '../Heading'
 import Image from './Image'
@@ -21,7 +22,7 @@ const GradientOverlay = styled.div`
   background: ${props => `linear-gradient(rgba(0,0,0,0.0), ${props.theme.color.imageOverlayGradient})`};
 `
 
-const MiniCard = styled.div`
+const StyledMiniCard = styled.div`
   border-radius: ${props => props.theme.radius.topLeft};
   overflow: hidden;
   width: 100%;
@@ -39,49 +40,41 @@ const Spacer = styled.div`
   margin: 0 0 0.75em 0;
 `
 
-const Date = styled.h4`
-  margin: 0;
-  padding: 2% 0%;
-`
-
-const StyledMiniCard = (props) => {
-  /* eslint-disable no-unused-vars */
+const MiniCard = (props) => {
   const {
     date,
-    children,
     image,
     label,
     imagePos,
   } = props
 
-  /* eslint-enable */
   return (
-    <MiniCard {...props}>
+    <StyledMiniCard {...props}>
        <Image image={image} imagePos={imagePos}/>
        <GradientOverlay />
        <Body>
-          {date ? <Date>{date}</Date> : null }
+          {date ? <Heading tag='h4'>{date}</ Heading> : null }
           <Heading tag='h4' truncate={true}>
-            {props.label}
+            {label}
           </Heading>
           <Spacer />
       </Body>
-    </MiniCard>
+    </StyledMiniCard>
   )
 }
 
-StyledMiniCard.propTypes = {
+MiniCard.defaultProps = {
+  date: '',
+  label: '',
+  image: '',
+  imagePos: 'center',
+}
+
+MiniCard.propTypes = {
   date: PropTypes.string,
-  children: PropTypes.element,
   label: PropTypes.string,
-  align: PropTypes.oneOf(['start', 'center', 'end']),
-  box: PropTypes.bool,
   image: PropTypes.string,
   imagePos: PropTypes.string,
-};
-
-StyledMiniCard.contextTypes = {
-  router: PropTypes.object,
-};
+}
 
 export default StyledMiniCard

@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import Image from './Image'
 
 import Heading from '../Heading'
 
-const Card = styled.div`
+const StyledCard = styled.div`
   border-radius: ${props => props.theme.radius.topLeft};
   overflow: hidden;
   width: 100%;
@@ -27,28 +27,19 @@ const Spacer = styled.div`
   margin: 0% 0% 2% 0%;
 `
 
-const Date = styled.h4`
-  margin: 0;
-  padding: 2% 0%;
-  color: ${props => props.theme.color.greyColorTertiary};
-`
-
-const StyledCard = (props) => {
-  /* eslint-disable no-unused-vars */
+const Card = (props) => {
   const {
     date,
     children,
     image,
-    label,
     imagePos,
   } = props
-  /* eslint-enable */
 
   return (
-    <Card {...props}>
+    <StyledCard {...props}>
        {image ? <Image image={image} imagePos={imagePos}/> : null }
        <Body>
-          {date ? <Date>{date}</Date> : null }
+          {date ? <Heading tag='h4'>{date}</ Heading> : null }
           <Heading tag='h4' truncate={true}>
             {props.label}
           </Heading>
@@ -56,22 +47,23 @@ const StyledCard = (props) => {
           { children }
       </Body>
       <Spacer />
-    </Card>
+    </StyledCard>
   )
 }
 
-StyledCard.propTypes = {
+Card.propTypes = {
   date: PropTypes.string,
-  children: PropTypes.node,
   label: PropTypes.string,
-  align: PropTypes.oneOf(['start', 'center', 'end']),
-  box: PropTypes.bool,
   image: PropTypes.string,
   imagePos: PropTypes.string,
-};
+  children: PropTypes.node,
+}
 
-StyledCard.contextTypes = {
-  router: PropTypes.object,
-};
+Card.defaultProps = {
+  date: '',
+  label: '',
+  image: '',
+  imagePos: '',
+}
 
-export default StyledCard;
+export default Card

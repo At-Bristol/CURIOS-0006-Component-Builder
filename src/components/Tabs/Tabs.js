@@ -4,6 +4,14 @@ import PropTypes from 'prop-types'
 import Tab from './Tab'
 import Box from '../Box'
 
+/**
+ * Tab component
+ * @name Text
+ * @param {[]} content - Content for Tabs
+ * @param {bool} isInverse - Render with inverted colors
+ * @param {bool} isResponsive - Do the tabs stack vertically on mobile screen width
+*/
+
 const Tabs = (props) => {
   const {
     content,
@@ -14,22 +22,22 @@ const Tabs = (props) => {
       {
         content.map((e, i) => (
           <Tab
-              isSelected={e.isSelected}
-              label={e.label}
-              key={i}
-            />
+            key={i}
+            isSelected={e.isSelected}
+            label={e.label}
+          />
         ))
       }
     </Box>
   )
 }
 
-Tabs.propTypes = {
-  content: PropTypes.array,
-}
-
 Tabs.defaultProps = {
   content: [],
+}
+
+Tabs.propTypes = {
+  content: PropTypes.array,
 }
 
 export default Tabs

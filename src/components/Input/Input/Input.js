@@ -82,7 +82,7 @@ const StyledInput = styled.input`
   display:block;
   width:100%;
   border:none;
-  border-bottom:${props => `${getSizing(props.size, 0.05)} solid ${props.isDisabled ? props.color : props.theme.color.textColor}`};  
+  border-bottom:${props => `${getSizing(props.size, 0.02)} solid ${props.isDisabled ? props.color : props.theme.color.textColor}`};  
   box-sizing:border-box;
   outline: none;
   box-shadow: none;
@@ -157,13 +157,13 @@ const Input = (props) => {
 }
 
 Input.defaultProps = {
-  isValid: false,
-  isRequired: true,
+  isValid: true,
+  isRequired: false,
   isDisabled: false,
-  content: 'fifjsdoif',
-  label: 'Email',
+  content: null,
+  label: 'Input',
   size: 's',
-  feedback: 'This is not a valid email address',
+  feedback: false,
 }
 
 Input.propTypes = {

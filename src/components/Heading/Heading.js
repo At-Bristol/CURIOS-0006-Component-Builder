@@ -2,20 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Box from '../Box'
-
 const StyledHeading = styled.div`
   color: ${(props) => {
-    if (props.inverse) return props.theme.color.inverseTextColor
+    if (props.isInverse) return props.theme.color.inverseTextColor
     if (props.color) return props.color
     return props.theme.color.textColor
   }};
-  font-family: ${props => props.strong ? props.theme.font.family.heavy : props.theme.font.family.regular};
-  font-weight: ${props => props.strong ? props.theme.font.weight.heavy : props.theme.font.weight.regular};
+  font-family: ${props => props.isStrong ? props.theme.font.family.heavy : props.theme.font.family.regular};
+  font-weight: ${props => props.isStrong ? props.theme.font.weight.heavy : props.theme.font.weight.regular};
   margin: 0;
   padding: 0;
-  text-transform: ${props => props.uppercase ? 'uppercase' : null};
-  text-overflow: ${props => props.truncate ? 'ellipsis' : null};
+  text-transform: ${props => props.isUppercase ? 'isUppercase' : null};
+  text-overflow: ${props => props.isTruncated ? 'ellipsis' : null};
 `
 
 const H1 = StyledHeading.extend`
@@ -52,43 +50,45 @@ const getTag = (tag) => {
   return 'h1'
 }
 
+/**
+ * Heading component
+ * @name Heading
+ * @param {string} color - Text Color
+ * @param {bool} isStrong - Render strong title (default true)
+ * @param {bool} isInverse - Use theme inverseTheme color
+ * @param {bool} isTruncated - truncate overflow to ellipsis
+ * @param {bool} isUppercase - force text to upper case
+ * @param {string} tag - tag between h1 - h6
+*/
 
 const Heading = (props) => {
   const {
-    children,
-    strong,
     tag,
-    invert,
-    style,
-    color,
+    children,
   } = props
 
   const Tag = getTag(tag)
 
   return (
-    <Box {...props} fill={false}>
-      <Tag strong={strong} invert={invert} style={style} color={color}>
-          {children}
-      </Tag>
-    </Box>
+    <Tag {...props}>
+      {children}
+    </Tag>
   )
 }
 
 Heading.propTypes = {
-  strong: PropTypes.bool,
+  isStrong: PropTypes.bool,
   tag: PropTypes.string,
-  truncate: PropTypes.bool,
-  uppercase: PropTypes.bool,
-  invert: PropTypes.bool,
+  isTruncated: PropTypes.bool,
+  isUppercase: PropTypes.bool,
+  isInverse: PropTypes.bool,
   children: PropTypes.node,
-  style: PropTypes.object,
-  padding: PropTypes.string,
   color: PropTypes.color,
 }
 
 Heading.defaultProps = {
-  invert: false,
-  strong: true,
+  isInverse: false,
+  isStrong: true,
 }
 
 export default Heading

@@ -1,3 +1,5 @@
+// TODO add isDisableBackground
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -22,6 +24,14 @@ const StyledModal = styled.div`
     max-height: 95%;
   }
 `
+
+/**
+ * Modal component
+ * @name Modal
+ * @param {bool} isVisible - Render the modal
+ * @param {element} children - Render notification as modal
+ */
+
 
 const Modal = (props) => {
   const {

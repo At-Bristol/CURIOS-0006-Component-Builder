@@ -1,33 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-
-import Box from '../Box'
-
-const StyledListItem = styled.div`
-  
-`
 
 const ListItem = (props) => {
   const {
-    content,
+    label,
+    isSelected,
   } = props
 
   return (
-    <StyledListItem>
-      <Box >
-         {content}
-      </Box>
-    </StyledListItem>
+    isSelected ?
+      <ul>{label}</ul>
+      : <ul>{label}</ul>
   )
 }
 
-ListItem.propTypes = {
-  content: PropTypes.object,
+ListItem.defaultProps = {
+  label: '',
+  isSelected: false,
 }
 
-ListItem.defaultProps = {
-  content: {},
+ListItem.propTypes = {
+  label: PropTypes.string,
+  isSelected: PropTypes.bool,
 }
 
 export default ListItem

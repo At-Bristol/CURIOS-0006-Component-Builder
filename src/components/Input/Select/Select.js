@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import Box from '../../Box'
 import Icon from '../../Icon'
-import Dialog from './Dialog'
+import Dialog from '../Dialog'
 
 const getLabel = (label, options = []) => {
   try {

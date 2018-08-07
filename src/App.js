@@ -69,7 +69,7 @@ class TestApp extends Component {
               { icon: 'add' },
               ]}/>
             <Sidebar
-            visible={true}
+            visible={false}
             content = {[
               { label: 'One' },
               { label: 'Two' },

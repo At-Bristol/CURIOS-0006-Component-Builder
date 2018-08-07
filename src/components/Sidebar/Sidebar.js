@@ -1,3 +1,6 @@
+// TODO Use List component
+// TODO seperate nav sidebar and generic sidebar
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -14,8 +17,8 @@ const Line = styled.div`
 
 const StyledSidebar = styled.div`
  background-color: ${props => props.theme.color.primaryShade};
- min-width: ${props => props.visible ? '250px' : 0};
- max-width: ${props => props.visible ? '330px' : 0};
+ min-width: ${props => props.isVisible ? '250px' : 0};
+ max-width: ${props => props.isVisible ? '330px' : 0};
  height: 100%;
  width: 100%;
  border-right : 1px solid ${props => props.theme.color.greyColorPrimary};
@@ -23,17 +26,25 @@ const StyledSidebar = styled.div`
  overflow: hidden;
 `
 
+/**
+ * Sidebar component
+ * @name Sidebar
+ * @param {[]} content - Content of sidebar
+ * @param {bool} isVisible - Render the notification
+ * @param {bool} isCollapsed - If icons exist on the top level collapses the sidebar to icons only
+ */
+
 const Sidebar = (props) => {
   const {
-    visible,
-    collapsed,
+    isVisible,
+    isCollapsed,
     content,
   } = props
 
   return (
     <StyledSidebar
-      visible={ visible }
-      collapsed = {collapsed}
+      isVisible={ isVisible }
+      isCollapsed = {isCollapsed}
     >
       {
         content.map((e, i) => {
@@ -74,16 +85,16 @@ const Sidebar = (props) => {
   )
 }
 
-Sidebar.propTypes = {
-  visible: PropTypes.bool,
-  collapsed: PropTypes.bool,
-  content: PropTypes.array,
+Sidebar.defaultProps = {
+  isVisible: true,
+  isCollapsed: false,
+  content: [],
 }
 
-Sidebar.defaultProps = {
-  visible: true,
-  collapsed: false,
-  content: [],
+Sidebar.propTypes = {
+  isVisible: PropTypes.bool,
+  isCollapsed: PropTypes.bool,
+  content: PropTypes.array,
 }
 
 export default Sidebar
