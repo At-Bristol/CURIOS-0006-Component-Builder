@@ -64,14 +64,27 @@ const StyledBox = styled.div`
   }};
 `
 
+/**
+ * Box Component - abstraction of FlexBox
+ * @name Box
+ * @param {string} justify - One of 'start', 'end', 'center', 'around', 'between', 'evenly'
+ * @param {string} size - One of 'full', 'large', 'medium', 'small'
+ * @param {string} alignItems - One of 'start', 'end', 'center', 'baseline', 'stretch'
+ * @param {string} alignContent - One of 'start', 'end', 'center', 'between', 'around', 'stretch',
+ * @param {bool} isWrap - Should wrap
+ * @param {bool} isFullscreen - Should be Fullscreen
+ * @param {bool} isFill - Should fill horizontally
+ * @param {node} children - Children elements
+ * @param {string} align - One of 'center', 'start', 'end'
+*/
+
 const Box = (props) => {
   const {
     children,
-    style,
   } = props
 
   return (
-    <StyledBox {...props} style={style} >
+    <StyledBox {...props} >
       {Children.map(children, e => e)}
     </ StyledBox>
   )
@@ -82,12 +95,11 @@ Box.propTypes = {
   size: PropTypes.oneOf(['full', 'large', 'medium', 'small']),
   alignItems: PropTypes.oneOf(['start', 'end', 'center', 'baseline', 'stretch']),
   alignContent: PropTypes.oneOf(['start', 'end', 'center', 'between', 'around', 'stretch']),
-  wrap: PropTypes.bool,
+  isWrap: PropTypes.bool,
   children: PropTypes.node,
   align: PropTypes.oneOf(['center', 'start', 'end']),
-  style: PropTypes.object,
   isFullscreen: PropTypes.bool,
-  fill: PropTypes.bool,
+  isFill: PropTypes.bool,
 }
 
 Box.defaultProps = {

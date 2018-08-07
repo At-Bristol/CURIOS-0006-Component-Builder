@@ -1,23 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import Image from './Image'
 
+import Image from './Image'
 import Heading from '../Heading'
 
-const StyledCard = styled.div`
-  border-radius: ${props => props.theme.radius.topLeft};
-  overflow: hidden;
-  width: 100%;
-  margin: 0;
-  float: left;
-  background-color: white; 
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
-  cursor: ${props => props.onClick ? 'pointer' : null};
-  &:hover {
-    transform: ${props => props.onClick ? 'translate(0.2%, 2%)' : null}
-  }
-`
+import StyledMiniCard from './StyledMiniCard'
+import StyledMaxCard from './StyledMaxCard'
+
+const StyledCard = (props) => {
+  const {
+    isMini,
+  } = props
+
+  return (
+    isMini ?
+      <StyledMiniCard {...props}/>
+      : <StyledMaxCard {...props}/>
+  )
+}
+
+StyledCard.defaultProps = {
+  isMini: false,
+}
+
+StyledCard.propTypes = {
+  isMini: PropTypes.bool,
+}
 
 const Body = styled.div`
   padding: 2% 5% ;
@@ -27,21 +36,32 @@ const Spacer = styled.div`
   margin: 0% 0% 2% 0%;
 `
 
+/**
+ * Card component
+ * @name Card
+ * @param {string} label - Label overlaying the imageUrl
+ * @param {string} date - date for the card
+ * @param {string} imageUrl - Background image url
+ * @param {string} imagePos - css background-position options
+ * @param {bool} isMini - return mini card
+*/
+
 const Card = (props) => {
   const {
     date,
     children,
-    image,
+    imageUrl,
     imagePos,
+    label,
   } = props
 
   return (
     <StyledCard {...props}>
-       {image ? <Image image={image} imagePos={imagePos}/> : null }
+       {imageUrl ? <Image imageUrl={imageUrl} imagePos={imagePos}/> : null }
        <Body>
           {date ? <Heading tag='h4'>{date}</ Heading> : null }
           <Heading tag='h4' truncate={true}>
-            {props.label}
+            {label}
           </Heading>
           <Spacer />
           { children }
@@ -54,7 +74,7 @@ const Card = (props) => {
 Card.propTypes = {
   date: PropTypes.string,
   label: PropTypes.string,
-  image: PropTypes.string,
+  imageUrl: PropTypes.string,
   imagePos: PropTypes.string,
   children: PropTypes.node,
 }
@@ -62,7 +82,7 @@ Card.propTypes = {
 Card.defaultProps = {
   date: '',
   label: '',
-  image: '',
+  imageUrl: '',
   imagePos: '',
 }
 
